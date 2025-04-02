@@ -1,0 +1,36 @@
+'''
+import requests
+from bs4 import BeautifulSoup
+
+url = "https://mfd.ru/currency/?currency=USD";
+
+req = requests.get(url, headers={'User-Agent': 'Mozilla/5.0 (Windows NT 6.1; WOW64; rv:50.0) Gecko/20100101 '
+'Firefox/50.0'})
+
+soup = BeautifulSoup(req.content, 'html.parser')
+
+coins = soup.find('table', {'class': 'mfd-table mfd-currency-table'})
+
+
+for coin in coins:
+	print(coin)
+'''
+import matplotlib.pyplot as plt
+import requests
+from bs4 import BeautifulSoup
+
+url = "https://mfd.ru/currency/?currency=USD";
+
+req = requests.get(url, headers={'User-Agent': 'Mozilla/5.0 (Windows NT 6.1; WOW64; rv:50.0) Gecko/20100101 '
+'Firefox/50.0'})
+
+soup = BeautifulSoup(req.content, 'html.parser')
+
+# находим табл с валютой
+table = soup.find('table', {'class': 'mfd-table mfd-currency-table'})
+datas = []
+coins = []
+
+for row in table.find_all('tr'):
+	datas = row.find('td')
+	print(datas)
