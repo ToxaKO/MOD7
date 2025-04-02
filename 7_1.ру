@@ -30,7 +30,15 @@ soup = BeautifulSoup(req.content, 'html.parser')
 table = soup.find('table', {'class': 'mfd-table mfd-currency-table'})
 datas = []
 coins = []
+data_1 = []
+coin_1 = []
 
-for row in table.find_all('tr'):
-	datas = row.find('td')
-	print(datas)
+for row in table.find_all('tr')[1:]:
+	colums = row.find_all('td')
+	datas = colums[0].text.strip()
+	coins = colums[1].text.strip()
+	data_1.append(datas)
+	coin_1.append(coins)
+
+plt.plot(data_1,coin_1)
+plt.show()
