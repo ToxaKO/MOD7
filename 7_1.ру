@@ -35,10 +35,13 @@ coin_1 = []
 
 for row in table.find_all('tr')[1:]:
 	colums = row.find_all('td')
-	datas = colums[0].text.strip()
+	datas = colums[0].text.strip('с')
 	coins = colums[1].text.strip()
 	data_1.append(datas)
 	coin_1.append(coins)
+	coin_1 = [float(coin_1[y]) for y in range(len(coin_1))]
+	data_1 = [str(data_1[x]) for x in range(len(data_1))]
+
 
 plt.plot(data_1,coin_1)
 plt.show()
